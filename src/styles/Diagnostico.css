@@ -1,0 +1,51 @@
+.subtitulo {
+    color: white;
+    margin-bottom: 5%;
+}
+
+.inputs {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-bottom: 3%;
+}
+
+.botones {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.texto-diagnostico {
+    border-radius: 10%;
+    border-color: white;
+    width: 15%;
+    
+}
+
+.container {
+    margin-left: 5%;
+}
+
+.chart-container {
+    display: flex;
+    direction: row;
+    justify-content: center;
+    justify-items: center;
+}
+
+.normal {
+    color: white;
+}
+
+.humedo {
+    color: white;
+    margin-top: 16%;
+    margin-right: -5%;
+}
+
+.seco {
+    color: white;
+    margin-top: 16%;
+    margin-left: -5%;
+}

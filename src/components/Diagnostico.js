@@ -8,7 +8,6 @@ export default function Diagnostico({setPantalla}) {
 
     const [humedad, setHumedad] = useState("");
     const [precipitaciones, setPrecipitaciones] = useState("");
-    const [prediccion, setPrediccion] = useState("");
     const [porcentaje, setPorcentaje] = useState(0);
     const [animar, setAnimar] = useState(true);
 
@@ -39,17 +38,14 @@ export default function Diagnostico({setPantalla}) {
         .catch((error) => console.error("Error: " + error))
         .then((response) => {
             let grupo = parseInt(response.prediccion);
-            if (grupo == 2){
+            if (grupo === 2){
                 setPorcentaje(0.83);
-                setPrediccion("Seco");
             }
             else if (grupo <= 1) {
                 setPorcentaje(0.5);
-                setPrediccion("Normal");
             }
             else {
                 setPorcentaje(0.165);
-                setPrediccion("Húmedo");
             }
         });
     }
@@ -76,6 +72,10 @@ export default function Diagnostico({setPantalla}) {
             </div>
 
             <h3 className="subtitulo">Efectuar suposición</h3>
+            <div className="labels">
+                <h5 className="texto-humedad">Humedad {"(%)"}</h5>
+                <h5 className="texto-precipitaciones">Precipitaciones {"(mm.)"}</h5>
+            </div>
             <div className="inputs">
                 <input type="text" placeholder="Humedad (%)" className="texto-diagnostico" name="humedad" value={humedad} onChange={p => setearHumedad(p.target.value)}></input>
                 <input type="text" placeholder="Precipitaciones (mm.)" className="texto-diagnostico" name="precipitaciones" value={precipitaciones} onChange={p => setearPrecipitaciones(p.target.value)}></input>
@@ -85,5 +85,5 @@ export default function Diagnostico({setPantalla}) {
                 <button type="button" class="btn btn-light btn-lg" onClick={predecir}>Predecir {">"}</button>
             </div>
         </div>
-    )
+    );
 }

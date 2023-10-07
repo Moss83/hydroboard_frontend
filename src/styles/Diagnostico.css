@@ -10,6 +10,12 @@
     margin-bottom: 3%;
 }
 
+.labels {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
 .botones {
     display: flex;
     flex-direction: row;
@@ -19,8 +25,17 @@
 .texto-diagnostico {
     border-radius: 10%;
     border-color: white;
-    width: 15%;
-    
+    width: 15%;   
+}
+
+.texto-humedad {
+    color: white;
+    margin-left: -25px;
+}
+
+.texto-precipitaciones {
+    color: white;
+    margin-left: 50px;
 }
 
 .container {

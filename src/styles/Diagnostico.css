@@ -3,6 +3,16 @@
     margin-bottom: 5%;
 }
 
+.porcentaje {
+    color: white;
+    margin-bottom: 5%;
+}
+
+.probabilidad-sequia {
+    color: white;
+    margin-bottom: 2%;
+}
+
 .inputs {
     display: flex;
     flex-direction: row;
@@ -30,12 +40,33 @@
 
 .texto-humedad {
     color: white;
+    margin-left: -50px;
+}
+
+.texto-temperatura {
+    color: white;
+    margin-left: -115px;
+}
+.texto-viento {
+    color: white;
+    margin-left: -140px;
+}
+.texto-ffmc {
+    color: white;
+    margin-left: -100px;
+}
+.texto-dmc {
+    color: white;
+    margin-left: -25px;
+}
+.texto-dc {
+    color: white;
     margin-left: -25px;
 }
 
 .texto-precipitaciones {
     color: white;
-    margin-left: 50px;
+    margin-left: -150px;
 }
 
 .container {

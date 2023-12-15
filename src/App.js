@@ -9,7 +9,10 @@ function App() {
 
   return (
     <div className="App">
-      {pantalla === 'Onboarding' ? (<Onboarding setPantalla = {setPantalla}></Onboarding>) : (<Diagnostico setPantalla = {setPantalla}></Diagnostico>)}
+      {
+        pantalla === 'Onboarding' ? (<Onboarding setPantalla = {setPantalla}></Onboarding>) : 
+        (<Diagnostico setPantalla = {setPantalla}></Diagnostico>)
+      }
     </div>
   );
 }

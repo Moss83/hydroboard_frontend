@@ -7,8 +7,13 @@ import '../styles/Diagnostico.css'
 export default function Diagnostico({setPantalla}) {
 
     const [humedad, setHumedad] = useState("");
+    const [temperatura, setTemperatura] = useState("");
+    const [viento, setViento] = useState("");
     const [precipitaciones, setPrecipitaciones] = useState("");
-    const [porcentaje, setPorcentaje] = useState(0);
+    const [ffmc, setFfmc] = useState("");
+    const [dmc, setDmc] = useState("");
+    const [dc, setDc] = useState("");
+    const [porcentaje, setPorcentaje] = useState(-1);
     const [animar, setAnimar] = useState(true);
 
     const irOnboarding = () => {
@@ -20,16 +25,43 @@ export default function Diagnostico({setPantalla}) {
         setHumedad(valor);
     }
 
+    const setearTemperatura = (valor) => {
+        setAnimar(false);
+        setTemperatura(valor);
+    }
+
+    const setearViento = (valor) => {
+        setAnimar(false);
+        setViento(valor);
+    }
+
     const setearPrecipitaciones = (valor) => {
         setAnimar(false);
         setPrecipitaciones(valor);
+    }
+
+    const setearFfmc = (valor) => {
+        setAnimar(false);
+        setFfmc(valor);
+    }
+
+    const setearDmc = (valor) => {
+        setAnimar(false);
+        setDmc(valor);
+    }
+
+    const setearDc = (valor) => {
+        setAnimar(false);
+        setDc(valor);
     }
 
     const predecir = () => {
 
         setAnimar(true);
 
-        fetch("http://localhost:5000/kmeans/" + humedad + "/" + precipitaciones, {
+        fetch("http://localhost:5000/kmeans/" + humedad + "/" + precipitaciones + "/" + temperatura + "/" + viento + 
+                "/" + ffmc + "/" + dmc + "/" + dc, 
+        {
             method: "GET",
             mode: "cors",
             headers: {"Content-Type": "application/json"}
@@ -38,20 +70,12 @@ export default function Diagnostico({setPantalla}) {
         .catch((error) => console.error("Error: " + error))
         .then((response) => {
             let grupo = parseInt(response.prediccion);
-            if (grupo === 2){
-                setPorcentaje(0.83);
-            }
-            else if (grupo <= 1) {
-                setPorcentaje(0.5);
-            }
-            else {
-                setPorcentaje(0.165);
-            }
+            setPorcentaje(grupo / 10)
         });
     }
 
     const chartStyle = {
-        width: '50%',
+        width: '50%'
     }
 
     return (
@@ -71,14 +95,26 @@ export default function Diagnostico({setPantalla}) {
                 </div>
             </div>
 
+            <h2 className="probabilidad-sequia">Probabilidad de sequía</h2>
+            <h2 className="porcentaje">{porcentaje === -1 ? "-" : parseInt(porcentaje * 100)}{"%"}</h2>
             <h3 className="subtitulo">Efectuar suposición</h3>
             <div className="labels">
                 <h5 className="texto-humedad">Humedad {"(%)"}</h5>
+                <h5 className="texto-temperatura">Temperatura {"(°C)"}</h5>
+                <h5 className="texto-viento">Viento {"(km/h)"}</h5>
                 <h5 className="texto-precipitaciones">Precipitaciones {"(mm.)"}</h5>
+                <h5 className="texto-ffmc">FFMC</h5>
+                <h5 className="texto-dmc">DMC</h5>
+                <h5 className="texto-dc">DC</h5>
             </div>
             <div className="inputs">
-                <input type="text" placeholder="Humedad (%)" className="texto-diagnostico" name="humedad" value={humedad} onChange={p => setearHumedad(p.target.value)}></input>
-                <input type="text" placeholder="Precipitaciones (mm.)" className="texto-diagnostico" name="precipitaciones" value={precipitaciones} onChange={p => setearPrecipitaciones(p.target.value)}></input>
+                <input type="text" style={{width: 100}} placeholder="Humedad (%)" className="texto-diagnostico" name="humedad" value={humedad} onChange={p => setearHumedad(p.target.value)}></input>
+                <input type="text" style={{width: 100}} placeholder="Temperatura (°C)" className="texto-diagnostico" name="temperatura" value={temperatura} onChange={p => setearTemperatura(p.target.value)}></input>
+                <input type="text" style={{width: 100}} placeholder="Viento (km/h)" className="texto-diagnostico" name="viento" value={viento} onChange={p => setearViento(p.target.value)}></input>
+                <input type="text" style={{width: 100}} placeholder="Precipitaciones (mm.)" className="texto-diagnostico" name="precipitaciones" value={precipitaciones} onChange={p => setearPrecipitaciones(p.target.value)}></input>
+                <input type="text" style={{width: 100}} placeholder="FFMC" className="texto-diagnostico" name="FFMC" value={ffmc} onChange={p => setearFfmc(p.target.value)}></input>
+                <input type="text" style={{width: 100}} placeholder="DMC" className="texto-diagnostico" name="DMC" value={dmc} onChange={p => setearDmc(p.target.value)}></input>
+                <input type="text" style={{width: 100}} placeholder="DC" className="texto-diagnostico" name="DC" value={dc} onChange={p => setearDc(p.target.value)}></input>
             </div>
             <div className="botones">
                 <button type="button" class="btn btn-light btn-lg" onClick={irOnboarding}>{"<"} Atrás</button>

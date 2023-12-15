@@ -70,7 +70,27 @@ export default function Diagnostico({setPantalla}) {
         .catch((error) => console.error("Error: " + error))
         .then((response) => {
             let grupo = parseInt(response.prediccion);
-            setPorcentaje(grupo / 10)
+            if (grupo === 0) {
+                setPorcentaje(0.6)
+            }
+            else if (grupo === 2) {
+                setPorcentaje(0.2)
+            }
+            else if (grupo === 6) {
+                setPorcentaje(0.3)
+            }
+            else if (grupo === 7) {
+                setPorcentaje(0.5)
+            }
+            else if (grupo === 8) {
+                setPorcentaje(0.9)
+            }
+            else if (grupo === 9) {
+                setPorcentaje(0.1)
+            }
+            else {
+                setPorcentaje(grupo / 10)
+            }
         });
     }
 
